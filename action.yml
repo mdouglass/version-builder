@@ -1,13 +1,13 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'version-builder'
+description: 'Build a version string from date- and build-related components'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  format:
+    description: 'the format to use for the generated version string'
     required: true
-    default: '1000'
+    default: '${year}.${month}.${date}'
 outputs:
-  time: # output will be available to future steps
-    description: 'The message to output'
+  version:
+    description: 'the generated version string'
 runs:
   using: 'node12'
   main: 'dist/index.js'
