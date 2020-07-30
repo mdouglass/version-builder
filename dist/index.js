@@ -65,7 +65,7 @@ const { format } = __webpack_require__(774)
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    core.setOutput('version', format())
+    core.setOutput('version', format(core.getInput('format')))
   } catch (error) {
     core.setFailed(error.message)
   }
@@ -418,11 +418,18 @@ module.exports = require("path");
 const coreModule = __webpack_require__(470)
 const githubModule = __webpack_require__(470)
 
+function padZero(value, maxLength = 2) {
+  return String(value).padStart(maxLength, '0')
+}
+
 module.exports.format = function format(formatString) {
   const now = new Date()
   const year = now.getUTCFullYear()
   const month = now.getUTCMonth() + 1
   const date = now.getUTCDate()
+  const hour = now.getUTCHours()
+  const minutes = now.getUTCMinutes()
+  const seconds = now.getUTCSeconds()
   const github = githubModule.context
   const env = process.env
   return eval('`' + formatString.replace('`', '\\`') + '`')

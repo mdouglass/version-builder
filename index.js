@@ -4,7 +4,7 @@ const { format } = require('./format')
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    core.setOutput('version', format())
+    core.setOutput('version', format(core.getInput('format')))
   } catch (error) {
     core.setFailed(error.message)
   }

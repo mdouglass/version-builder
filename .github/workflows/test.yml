@@ -26,5 +26,19 @@ jobs:
         format: '${year}.${month}.${date}'
     - uses: ./
       with:
-        format: '${year}.${month}.${date}+${github.ref}+${github.sha}'
-  
+        format: '${github.ref}+${github.sha}'
+    - uses: ./
+      with:
+        format: '${year-2000}'
+    - uses: ./
+      with:
+        format: '${github.sha.substr(0,7)}'
+    - uses: ./
+      with:
+        format: '${padZero(minutes)}'
+    - uses: ./
+      with:
+        format: '${padZero(minutes, 5)}'
+    - uses: ./
+      with:
+        format: '${year-2000}.${month}${padZero(date)}.${hour}${padZero(minutes)}+${github.ref}.${github.sha.substr(0, 7)}'
