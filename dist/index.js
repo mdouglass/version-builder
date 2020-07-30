@@ -4464,21 +4464,23 @@ function __getPRNumber() {
 }
 
 function __buildGithubContext() {
-  const github = {
+  return {
     payload: githubModule.context.payload,
-    branch: github.payload.pull_request ? github.payload.pull_request.head.ref : 'unknown',
+    branch: githubModule.payload.pull_request
+      ? githubModule.payload.pull_request.head.ref
+      : 'unknown',
     commit: {
-      sha: github.context.sha,
-      shaShort: github.context.sha.substr(0, 7),
+      sha: githubModule.context.sha,
+      shaShort: githubModule.context.sha.substr(0, 7),
     },
-    pr: github.payload.pull_request
+    pr: githubModule.payload.pull_request
       ? {
-          id: github.payload.pull_request.id,
-          number: github.payload.pull_request.number,
-          string: `PR-${github.payload.pull_request.number}`,
+          id: githubModule.payload.pull_request.id,
+          number: githubModule.payload.pull_request.number,
+          string: `PR-${githubModule.payload.pull_request.number}`,
         }
       : {},
-    ref: github.context.ref,
+    ref: githubModule.context.ref,
     run: {
       id: githubModule.context.runId,
       number: githubModule.context.runNumber,
