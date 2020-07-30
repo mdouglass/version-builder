@@ -180,7 +180,7 @@ async function run() {
 
     let contextProgram = ''
     for (const [key, value] of Object.entries(context)) {
-      if (typeof key === 'object' && key !== null) {
+      if (typeof value === 'object' && value !== null) {
         contextProgram += `var ${key} = JSON.parse('${JSON.stringify(value)}');\n`
       } else {
         contextProgram += `var ${key} = ${value};\n`
