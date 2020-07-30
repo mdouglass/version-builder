@@ -21,24 +21,32 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: ./
+      continue-on-error: true
     - uses: ./
+      continue-on-error: true
       with:
         format: '${year}.${month}.${date}'
     - uses: ./
+      continue-on-error: true
       with:
         format: '${github.ref}+${github.sha}'
     - uses: ./
+      continue-on-error: true
       with:
         format: '${year-2000}'
     - uses: ./
+      continue-on-error: true
       with:
         format: '${github.sha.substr(0,7)}'
     - uses: ./
+      continue-on-error: true
       with:
         format: '${padZero(minutes)}'
     - uses: ./
+      continue-on-error: true
       with:
         format: '${padZero(minutes, 5)}'
     - uses: ./
+      continue-on-error: true
       with:
         format: '${year-2000}.${month}${padZero(date)}.${hour}${padZero(minutes)}+${github.ref}.${github.sha.substr(0, 7)}'

@@ -22,3 +22,8 @@ yy.mdd.hhmm+branch.build.revision
       const sha = context.sha.substr(0,7)
       return `${major}.${minor}.${patch}+${ref}.${run}.${sha}`
     result-encoding:  string
+
+
+## TODO
+Write real unit tests and clean up tests in test.yml
+Make tests in test.yml continue on failure

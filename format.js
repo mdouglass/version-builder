@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 const coreModule = require('@actions/core')
-const githubModule = require('@actions/core')
+const githubModule = require('@actions/github')
 
 function padZero(value, maxLength = 2) {
   return String(value).padStart(maxLength, '0')
