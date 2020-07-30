@@ -1,4 +1,5 @@
 const core = require('@actions/core')
+const github = require('@actions/github')
 
 // most @actions toolkit packages have async methods
 async function run() {
@@ -8,8 +9,10 @@ async function run() {
       year: now.getUTCFullYear(),
       month: now.getUTCMonth() + 1,
       date: now.getUTCDate(),
-      sha: 
+      ...github.context,
     }
+    core.debug('context: ' + JSON.stringify(context))
+
     let contextProgram = ''
     for (const [key, value] of Object.entries(context)) {
       if (typeof key === 'object' && key !== null) {
@@ -18,11 +21,15 @@ async function run() {
         contextProgram += `var ${key} = ${value};\n`
       }
     }
+    core.debug('contextProgram: ' + contextProgram)
 
     const formatString = core.getInput('format').replace('`', '\\`')
     const templateProgram = '`' + formatString + '`'
+    core.debug('templateProgram: ' + templateProgram)
 
     const version = eval(contextProgram + templateProgram)
+    core.debug('version: ' + version)
+
     core.setOutput('version', version)
   } catch (error) {
     core.setFailed(error.message)
