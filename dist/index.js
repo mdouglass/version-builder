@@ -4459,8 +4459,8 @@ function padZero(value, maxLength = 2) {
 }
 
 function __getPRNumber() {
-  const match = /refs\/pull\/(\d+)\/merge/.exec(githubModule.context.ref)
-  return match ? match.groups[1] : undefined
+  const match = /^refs\/pull\/(\d+)\/merge$/.exec(githubModule.context.ref)
+  return match ? match[1] : undefined
 }
 
 function __getPR() {
