@@ -4463,9 +4463,27 @@ function __getPRNumber() {
   return match ? match[1] : undefined
 }
 
-function __getPR() {
-  const pr = __getPRNumber()
-  return pr ? `PR-${pr}` : undefined
+function __buildGithubContext() {
+  const github = {
+    payload: githubModule.context.payload,
+    branch: github.payload.pull_request ? github.payload.pull_request.head.ref : 'unknown',
+    commit: {
+      sha: github.context.sha,
+      shaShort: github.context.sha.substr(0, 7),
+    },
+    pr: github.payload.pull_request
+      ? {
+          id: github.payload.pull_request.id,
+          number: github.payload.pull_request.number,
+          string: `PR-${github.payload.pull_request.number}`,
+        }
+      : {},
+    ref: github.context.ref,
+    run: {
+      id: githubModule.context.runId,
+      number: githubModule.context.runNumber,
+    },
+  }
 }
 
 module.exports.format = function format(formatString) {
@@ -4476,14 +4494,8 @@ module.exports.format = function format(formatString) {
   const hour = now.getUTCHours()
   const minutes = now.getUTCMinutes()
   const seconds = now.getUTCSeconds()
-  const github = githubModule.context
-  const git = {
-    prNumber: __getPRNumber(),
-    pr: __getPR(),
-    branch: 'unknown',
-  }
+  const github = __buildGithubContext()
   const env = process.env
-  coreModule.debug('git: ' + JSON.stringify(git))
   coreModule.debug('github: ' + JSON.stringify(github))
   return eval('`' + formatString.replace('`', '\\`') + '`')
 }

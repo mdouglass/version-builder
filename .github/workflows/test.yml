@@ -29,7 +29,7 @@ jobs:
     - uses: ./
       continue-on-error: true
       with:
-        format: '${github.ref}+${github.sha}'
+        format: '${github.branch}+${github.commit.sha}'
     - uses: ./
       continue-on-error: true
       with:
@@ -37,7 +37,7 @@ jobs:
     - uses: ./
       continue-on-error: true
       with:
-        format: '${github.sha.substr(0,7)}'
+        format: '${github.shaShort}'
     - uses: ./
       continue-on-error: true
       with:
@@ -49,4 +49,4 @@ jobs:
     - uses: ./
       continue-on-error: true
       with:
-        format: '${year-2000}.${month}${padZero(date)}.${hour}${padZero(minutes)}+${git.pr??git.branch}.${github.sha.substr(0, 7)}'
+        format: '${year-2000}.${month}${padZero(date)}.${hour}${padZero(minutes)}+${git.pr.string??git.branch}.${github.commit.shaShort}'
