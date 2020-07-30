@@ -49,4 +49,4 @@ jobs:
     - uses: ./
       continue-on-error: true
       with:
-        format: '${year-2000}.${month}${padZero(date)}.${hour}${padZero(minutes)}+${github.ref}.${github.sha.substr(0, 7)}'
+        format: '${year-2000}.${month}${padZero(date)}.${hour}${padZero(minutes)}+${git.pr??git.branch}.${github.sha.substr(0, 7)}'
