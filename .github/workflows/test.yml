@@ -26,5 +26,5 @@ jobs:
         format: '${year}.${month}.${date}'
     - uses: ./
       with:
-        format: '${year}.${month}.${date}+${ref}+${sha}'
+        format: '${year}.${month}.${date}+${github.ref}+${github.sha}'
   

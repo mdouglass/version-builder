@@ -9,17 +9,14 @@ async function run() {
       year: now.getUTCFullYear(),
       month: now.getUTCMonth() + 1,
       date: now.getUTCDate(),
-      ...github.context,
+      github: github.context,
+      env: process.env,
     }
     core.debug('context: ' + JSON.stringify(context))
 
     let contextProgram = ''
     for (const [key, value] of Object.entries(context)) {
-      if (typeof value === 'object' && value !== null) {
-        contextProgram += `var ${key} = JSON.parse('${JSON.stringify(value)}');\n`
-      } else {
-        contextProgram += `var ${key} = ${value};\n`
-      }
+      contextProgram += `var ${key} = JSON.parse('${JSON.stringify(value)}');\n`
     }
     core.debug('contextProgram: ' + contextProgram)
 
