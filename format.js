@@ -6,11 +6,6 @@ function padZero(value, maxLength = 2) {
   return String(value).padStart(maxLength, '0')
 }
 
-function __getPRNumber() {
-  const match = /^refs\/pull\/(\d+)\/merge$/.exec(githubModule.context.ref)
-  return match ? match[1] : undefined
-}
-
 function __toBranch(ref) {
   const match = /^refs\/heads\/(.*)$/.exec(ref)
   return match ? match[1] : undefined

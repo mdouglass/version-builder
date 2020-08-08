@@ -4458,8 +4458,8 @@ function padZero(value, maxLength = 2) {
   return String(value).padStart(maxLength, '0')
 }
 
-function __getPRNumber() {
-  const match = /^refs\/pull\/(\d+)\/merge$/.exec(githubModule.context.ref)
+function __toBranch(ref) {
+  const match = /^refs\/heads\/(.*)$/.exec(ref)
   return match ? match[1] : undefined
 }
 
@@ -4467,7 +4467,7 @@ function __buildGithubContext() {
   const pr = githubModule.context.payload.pull_request
   return {
     payload: githubModule.context.payload,
-    branch: pr ? pr.head.ref : 'unknown',
+    branch: pr ? pr.head.ref : __toBranch(githubModule.context.payload.ref),
     commit: {
       sha: githubModule.context.sha,
       shaShort: githubModule.context.sha.substr(0, 7),
