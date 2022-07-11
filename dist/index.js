@@ -51,7 +51,7 @@ module.exports.format = function format(formatString) {
   const seconds = now.getUTCSeconds()
   const github = __buildGithubContext()
   const env = process.env
-  coreModule.debug('github: ' + JSON.stringify(github))
+  coreModule.info('github: ' + JSON.stringify(github))
   return eval('`' + formatString.replace('`', '\\`') + '`')
 }
 
