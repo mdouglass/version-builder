@@ -37,6 +37,7 @@ function __buildGithubContext() {
     run: {
       id: githubModule.context.runId,
       number: githubModule.context.runNumber,
+      attempt: parseInt(process.env.GITHUB_RUN_ATTEMPT, 10)
     },
   }
 }
@@ -9747,6 +9748,7 @@ async function run() {
     const output = format(input)
     core.info(`${input} => ${output}`)
     core.setOutput('version', output)
+    core.setOutput('result', output)
   } catch (error) {
     core.setFailed(error.message)
   }
