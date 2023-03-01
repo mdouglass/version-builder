@@ -7,7 +7,9 @@ inputs:
     default: '${year}.${month}.${date}'
 outputs:
   version:
-    description: 'the generated version string'
+    description: 'the generated version string (deprecated)'
+  result:
+    description: 'the generated string'
 runs:
   using: 'node16'
   main: 'dist/index.js'
